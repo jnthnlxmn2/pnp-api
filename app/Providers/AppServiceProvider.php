@@ -8,6 +8,10 @@ use Illuminate\Support\Facades\Schema;
 use App\Repositories\User\UserEloquent;
 use App\Repositories\User\UserRepository;
 
+use App\Repositories\FileCategory\FileCategoryEloquent;
+use App\Repositories\FileCategory\FileCategoryRepository;
+
+
 
 
 class AppServiceProvider extends ServiceProvider
@@ -30,6 +34,7 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
           $this->app->singleton(UserRepository::class,UserEloquent::class);
+          $this->app->singleton(FileCategoryRepository::class,FileCategoryEloquent::class);
         //
     }
 }

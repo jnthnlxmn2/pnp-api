@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFileCategoryTable extends Migration
+class AddDeleteAtInFileCategory extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,11 @@ class CreateFileCategoryTable extends Migration
      */
     public function up()
     {
-        Schema::create('file_categories', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name');
-            $table->string('description');
-            $table->timestamps();
+        Schema::table('file_category', function (Blueprint $table) {
+            $table->integer('deleted')->unsigned()->default(0);
+
         });
     }
-
     /**
      * Reverse the migrations.
      *
@@ -28,6 +25,6 @@ class CreateFileCategoryTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('file_category');
+        //
     }
 }
