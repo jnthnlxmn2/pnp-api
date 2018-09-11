@@ -5,12 +5,12 @@ namespace App\Repositories\Common\Eloquent;
 // use App\One\Common\Parameters\FilterParameters;
 // use App\One\Common\Parameters\PaginationParameters;
 // use App\One\Common\Parameters\SortParameters;
-use Illuminate\Database\Eloquent\Model;
 use Auth;
+use Illuminate\Database\Eloquent\Model;
+
 abstract class EloquentRepository
 {
     // use EloquentFilterable, EloquentPaginatable, EloquentSortable;
-
 
     /**
      * @var Model
@@ -21,17 +21,16 @@ abstract class EloquentRepository
     /**
      * @param Model $model
      */
-    function __construct(Model $model)
+    public function __construct(Model $model)
     {
         $this->model = $model;
         $this->options = [
             'paginate' => 15,
             'limit' => 0,
             'order' => 'DESC',
-            'order_by' => 'created_at'
+            'order_by' => 'created_at',
         ];
     }
-
 
     /**
      * @param PaginationParameters $paginationParameters
@@ -43,11 +42,11 @@ abstract class EloquentRepository
     {
         $query = $this->model->query();
 
-        if($filterParameters) {
+        if ($filterParameters) {
             $this->buildFilters($filterParameters, $query);
         }
 
-        if($sortParameters) {
+        if ($sortParameters) {
             $this->buildSorting($sortParameters, $query);
         }
 
@@ -57,7 +56,6 @@ abstract class EloquentRepository
 
         return $this->paginate($paginationParameters, $query->get(), $total);
     }
-
 
     /**
      * @param $id
@@ -81,7 +79,6 @@ abstract class EloquentRepository
 
         return $model;
     }
-
 
     /**
      * @param $id
@@ -109,18 +106,20 @@ abstract class EloquentRepository
      * @param $date
      * @return bool|string
      */
-    public function parseDate($date) {
+    public function parseDate($date)
+    {
         return date('Y-m-d H:i:s', strtotime($date));
     }
 
-    public function getOptions($options = []){
-        if(!isset($options['paginate']) || (!$options['paginate'] && $options['paginate'] < 1)){
+    public function getOptions($options = [])
+    {
+        if (!isset($options['paginate']) || (!$options['paginate'] && $options['paginate'] < 1)) {
             $options['paginate'] = $this->options['paginate'];
         }
-        if(!isset($options['limit']) || (!$options['limit'] && $options['limit'] < 1)){
+        if (!isset($options['limit']) || (!$options['limit'] && $options['limit'] < 1)) {
             $options['limit'] = $this->options['limit'];
         }
-        if(!isset($options['order']) || (!$options['order'])){
+        if (!isset($options['order']) || (!$options['order'])) {
             $options['order'] = $this->options['order'];
         }
         return $options;
@@ -130,7 +129,7 @@ abstract class EloquentRepository
      * @param array $attr
      * @return mixed
      */
-    public function saveByUser($attr = [],$field = 'user_id')
+    public function saveByUser($attr = [], $field = 'user_id')
     {
         $attr[$field] = Auth::user()->id;
         $model = new $this->model;

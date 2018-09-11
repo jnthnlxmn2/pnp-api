@@ -14,3 +14,12 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+Route::group(['middleware' => 'auth:api'],function(){
+    Route::group(['middleware'=> 'private.files','namespace' => 'Admin'],function($api){
+        $api->get('file/{folder}/{file}','FileController@getFile');
+        $api->get('file/{folder}/{file}/download','FileController@downloadFile');
+    });
+
+});

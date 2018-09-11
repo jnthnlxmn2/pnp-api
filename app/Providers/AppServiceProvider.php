@@ -12,6 +12,11 @@ use App\Repositories\FileCategory\FileCategoryEloquent;
 use App\Repositories\FileCategory\FileCategoryRepository;
 
 
+use App\Repositories\File\FileEloquent;
+use App\Repositories\File\FileRepository;
+
+
+
 
 
 class AppServiceProvider extends ServiceProvider
@@ -35,6 +40,7 @@ class AppServiceProvider extends ServiceProvider
     {
           $this->app->singleton(UserRepository::class,UserEloquent::class);
           $this->app->singleton(FileCategoryRepository::class,FileCategoryEloquent::class);
+          $this->app->singleton(FileRepository::class,FileEloquent::class);
         //
     }
 }
