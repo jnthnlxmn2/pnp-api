@@ -1,8 +1,9 @@
 <?php
 namespace App\Repositories\User;
 
-interface UserRepository{
-       /**
+interface UserRepository
+{
+    /**
      * @param $id
      * @return mixed
      */
@@ -40,9 +41,6 @@ interface UserRepository{
 
     public function changePassword($new_password);
 
-
-
+    public function getUsers($options = []);
 
 }
-
-?>

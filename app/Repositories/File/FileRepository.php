@@ -36,21 +36,26 @@ interface FileRepository
      */
     public function uploadFile($file, $attr = []);
 
-             /**
+    /**
      * @param array $attr
      * @return mixed
      */
-    public function saveByUser($attr = [],$field);
+    public function saveByUser($attr = [], $field);
 
-     /**
+    /**
      * @param $id
      * @return mixed
      */
-    public function getAllByUser($options=[]);
-  /**
+    public function getAllByUser($options = []);
+    /**
      * @param $id
      * @return mixed
      */
-    public function getFileByCategory($options=[], $category_id);
+    public function getFileByCategory($options = [], $category_id);
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function uploadEditFile($id, $file, $attr = []);
 
 }

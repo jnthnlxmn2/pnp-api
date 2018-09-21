@@ -2,29 +2,35 @@
 
 namespace App\Repositories\User;
 
-use App\User;
 use App\Repositories\Common\Eloquent\EloquentRepository;
+use App\User;
 use Auth;
-class UserEloquent extends EloquentRepository implements UserRepository{
+
+class UserEloquent extends EloquentRepository implements UserRepository
+{
     protected $model;
 
-    public function __construct(User $user){
+    public function __construct(User $user)
+    {
         $this->model = $user;
     }
 
-    public function getAll(){
+    public function getAll()
+    {
         return $this->model->all();
     }
-    
-    public function getMe(){
+
+    public function getMe()
+    {
         $user = Auth::user();
         $user->user_type;
 
-       return $user;
+        return $user;
 
     }
 
-    public function changePassword($new_password){
+    public function changePassword($new_password)
+    {
         $user = Auth::user();
         $user->password = bcrypt($new_password);
         $user->save();
@@ -33,6 +39,20 @@ class UserEloquent extends EloquentRepository implements UserRepository{
             'message' => 'Password updated!!!',
         );
     }
-    
+
+    public function getUsers($options = [])
+    {
+        $options = $this->getOptions($options);
+        $users = $this->model->orderBy('created_at', 'DESC')
+            ->orderBy('created_at', 'desc')
+            ->limit($options['limit'])
+            ->paginate($options['paginate']);
+        foreach ($users as $user) {
+            $user->user_type;
+        }
+
+        return $users;
+
+    }
+
 }
-?>

@@ -18,7 +18,7 @@ class FileController extends Controller
     public function uploadFile(UploadFileRequest $request)
     {
         $file = $request->file('file');
-        $params = $request->only(['file_category_id']);
+        $params = $request->only(['name','file_category_id']);
         $upload = $this->fileRepository->uploadFile($file, $params);
         return response()->success($upload);
 
@@ -31,7 +31,7 @@ class FileController extends Controller
         return response()->success($files);
     }
 
-    public function getFileByCategory(Request $request, $category_id ){
+    public function getFileByCategory($category_id,Request $request){
         $options = $request->only('paginate', 'limit', 'order');
         $files = $this->fileRepository->getFileByCategory($options, $category_id);
         return response()->success($files);

@@ -24,8 +24,9 @@ class UploadFileRequest extends FormRequest
     public function rules()
     {
         return [
-            /*'file' => 'required|mimes:doc,pdf,docx,csv,xls,txt',
-            'file_category_id' => 'required',*/
+            'file' => 'required|mimes:doc,pdf,docx,csv,xls,txt,png,jpg,jpeg',
+            'file_category_id' => 'required',
+            'name'=>'required'
         ];
     }
 }

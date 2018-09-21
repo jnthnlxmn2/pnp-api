@@ -13,5 +13,7 @@ class FileCategory extends Model
 
     protected $hidden = ['deleted'];
 
-
+    public function category(){
+        $this->belongsTo('App\File','file_category_id');
+    }
 }
