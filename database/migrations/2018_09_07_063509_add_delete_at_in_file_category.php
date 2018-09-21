@@ -13,7 +13,7 @@ class AddDeleteAtInFileCategory extends Migration
      */
     public function up()
     {
-        Schema::table('file_category', function (Blueprint $table) {
+        Schema::table('file_categories', function (Blueprint $table) {
             $table->integer('deleted')->unsigned()->default(0);
 
         });
