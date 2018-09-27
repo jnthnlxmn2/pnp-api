@@ -14,7 +14,7 @@ class MakeDefaultAdminSeeder extends Seeder
         DB::table('users')->insert([
             'name' => 'Admin',
             'password' => bcrypt(123456789),
-            'email' => str_random(10) . '@gmail.com',
+            'email' => 'admin@test.com',
             'user_type_id' => 1
         ]);
     }
