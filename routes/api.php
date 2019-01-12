@@ -11,6 +11,7 @@
 |
  */
 Route::post('/login', 'UserController@login')->name("login");
+Route::post('register', 'UserController@register')->name("register");
 Route::group(['middleware' => 'auth:api'], function () {
 
     Route::group(['namespace' => 'Me', 'prefix' => 'me'], function ($api) {
@@ -26,10 +27,14 @@ Route::group(['middleware' => 'auth:api'], function () {
         Route::group(['middleware' => 'admin'],function($api){
         //Profile
         $api->resource('file_category', 'FileCategoryController');
+        $api->resource('records', 'RecordController');
+        $api->resource('incident', 'IncidentController');
+        $api->resource('province', 'ProvinceController');
         $api->resource('file','FileController');
         $api->post('edit-file-upload/{id}','FileController@editFile');
         $api->post('register', 'UserController@register');
         $api->get('users', 'UserController@getUsers');
+
         });
     });
 
