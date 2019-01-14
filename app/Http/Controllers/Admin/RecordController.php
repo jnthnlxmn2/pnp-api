@@ -146,11 +146,32 @@ class RecordController extends Controller
 
 
 
+    public function search(Request $request)
+    {   
+        $params = $request->only([
+            'gender',
+            'place_of_incident',
+            '18below_report',
+            '18above_report',
+            '18below_victim',
+            '18above_victim',
+            'from',
+            'to'
+        ]);
+        $Record = $this->recordRepository->search($params);
+        return response()->success($Record);
+    }
+
+
+    
+
+
     public function show($id)
     {
         $announcement = $this->filecategoryRepository->find($id);
         return response()->success($announcement);
     }
+
 
 
 
@@ -162,11 +183,14 @@ class RecordController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(FileCategoryRequest $request, $id)
+    public function update(Request $request, $id)
     {
-        $filecategory_request = $request->only(['name','description']);
-        $announcement = $this->filecategoryRepository->update($id,$filecategory_request);
-        return response()->success($announcement);
+        $request = $request->only(['action_brgy',
+        'action_prosecutor',
+        'action_court',
+        'action_investigation']);
+        $report = $this->recordRepository->update($id,$request);
+        return response()->success($report);
 
     }
 

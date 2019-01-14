@@ -14,6 +14,14 @@ interface RecordRepository{
      */
     public function save($attr = []);
 
+
+        /**
+     * @param array $attr
+     * @return mixed
+     */
+    public function search($attr = []);
+
+
     /**
      * @param $id
      * @param array $attr

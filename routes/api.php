@@ -28,6 +28,7 @@ Route::group(['middleware' => 'auth:api'], function () {
         //Profile
         $api->resource('file_category', 'FileCategoryController');
         $api->resource('records', 'RecordController');
+        $api->post('search','RecordController@search');
         $api->resource('incident', 'IncidentController');
         $api->resource('province', 'ProvinceController');
         $api->resource('file','FileController');

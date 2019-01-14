@@ -120,6 +120,10 @@ class Record extends Model
         'aut_name_of_desk_officer',
         'case_name_of_designated_invstgtr_oncase',
         'case_name_of_cheif',
+        'action_brgy',
+        'action_prosecutor',
+        'action_court',
+        'action_investigation'
        
         ];
 
