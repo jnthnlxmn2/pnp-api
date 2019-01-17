@@ -69,11 +69,7 @@ class RecordEloquent extends EloquentRepository implements RecordRepository{
             }
           }
           if(isset($request['from']) && isset($request['to'])){
-            $query->where('date_reported','>=',$request['from']);
-            $query->where('date_reported','<=',$request['to']);
-          }
-          if(isset($request['from'])){
-            $query->where('date_reported','=',$request['from']);
+            $query->whereBetween('date_reported',[$request['from'],$request['to']]);
           }
         }) 
         ->get();
