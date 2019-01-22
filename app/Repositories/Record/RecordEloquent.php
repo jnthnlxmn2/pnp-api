@@ -3,6 +3,7 @@
 namespace App\Repositories\Record;
 
 use App\Record;
+use App\User;
 use App\Incident;       
 use App\Province;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
 use DB;
@@ -13,8 +14,9 @@ use Auth;
 class RecordEloquent extends EloquentRepository implements RecordRepository{
     protected $model;
 
-    public function __construct(Record $Record,Incident $Incident,Province $Province){
+    public function __construct(Record $Record,Incident $Incident,Province $Province,User $user){
         $this->model = $Record;
+        $this->user = $user;
         $this->province= $Province;
         $this->incident = $Incident;
         $this->options = ['paginate' => 15,'limit' => 0,'order' => 'desc'];
@@ -34,6 +36,12 @@ class RecordEloquent extends EloquentRepository implements RecordRepository{
             $incident = $this->incident->where('id',$records[$x]['incdnt_type_id'])
                                     ->first();
             $records[$x]['incident_type'] = $incident;
+        }
+
+        for($y=0;$y<$count;$y++){
+            $officer = $this->user->where('id',$records[$y]['aut_name_of_desk_officer'])
+                                    ->first();
+            $records[$y]['desk_officer'] = $officer;
         }
 
         return $records;
@@ -89,6 +97,13 @@ class RecordEloquent extends EloquentRepository implements RecordRepository{
                                     ->first();
             $records[$x]['incident_place'] = $incident;
         }
+
+        for($y=0;$y<$count;$y++){
+            $officer = $this->user->where('id',$records[$y]['aut_name_of_desk_officer'])
+                                    ->first();
+            $records[$y]['desk_officer'] = $officer;
+        }
+
 
         return $records;
 

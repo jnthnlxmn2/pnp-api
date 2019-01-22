@@ -27,6 +27,11 @@ class UserController extends Controller
             'email' => 'required|email',
             'password' => 'required',
             'c_password' => 'required|same:password',
+            'rank' => 'required',
+            'first_name' => 'required',
+            'initial' => 'required',
+            'surname' => 'required',
+            
         ]);
         if ($validator->fails()) {
             return response()->json(['error' => $validator->errors()], 401);
