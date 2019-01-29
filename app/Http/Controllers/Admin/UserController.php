@@ -31,7 +31,7 @@ class UserController extends Controller
             'first_name' => 'required',
             'initial' => 'required',
             'surname' => 'required',
-            
+            'user_type_id' => 'required',
         ]);
         if ($validator->fails()) {
             return response()->json(['error' => $validator->errors()], 401);
