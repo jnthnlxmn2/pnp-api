@@ -13,6 +13,7 @@ class Record extends Model
         'date_reported',
         'date_incident',
         'place_of_incident',
+        'itm_a_first_name'
         'itm_a_family_name',
         'itm_a_middle_name',
         'itm_a_qualifier',
